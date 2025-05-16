@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Villa Para d’Or - Uw Exclusieve Vakantie-ervaring in Benissa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5D534A;
+            --secondary-color: #CEC8B4;
+            --text-color: #383838;
+            --light-gray: #f4f2ef;
+            --background-color: #ffffff;
+            --footer-background: #4a423b; /* Iets donkerder dan primair */
+            --footer-text: #f4f2ef;
+            --cta-color: #CB6D51;
+            --cta-hover-color: #b05a40;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-headings: 'Lora', serif;
+            --border-radius: 8px;
+            --shadow-light: 0 5px 15px rgba(0,0,0,0.07);
+            --shadow-medium: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 17px;
+            padding-top: 80px; /* Aangepast aan nav hoogte */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Voorkom horizontale scrollbars */
+        }
+
+        .wrapper { max-width: 1150px; margin: 0 auto; padding: 0 30px; } /* Iets breder */
+
+        /* --- Navigation Menu --- */
+        nav {
+            background-color: rgba(255, 255, 255, 0.97);
+            box-shadow: var(--shadow-light);
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            height: 80px; display: flex; align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        nav.scrolled { /* Stijl voor als er gescrolled is */
+            background-color: rgba(255, 255, 255, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        nav .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1150px; margin: 0 auto; padding: 0 30px; }
+        nav .logo a { font-family: var(--font-headings); font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; transition: color 0.3s ease;}
+        nav .logo a:hover { color: var(--cta-color); }
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { text-decoration: none; color: var(--primary-color); opacity: 0.8; font-weight: 500; font-size: 1.05rem; transition: opacity 0.3s ease, color 0.3s ease, font-weight 0.3s ease; position: relative; padding-bottom: 5px;}
+        nav ul li a::after { /* Subtiele underline animatie */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--cta-color);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 60%; }
+        nav ul li a:hover, nav ul li a.active { color: var(--cta-color); opacity: 1; font-weight: 600;}
+        .menu-toggle { display: none; font-size: 1.8rem; color: var(--primary-color); cursor: pointer; }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            padding: 0; /* Geen padding, afbeelding neemt volledige hoogte in parallax container */
+            height: 85vh; /* Procentuele hoogte van viewport */
+            min-height: 500px;
+            max-height: 700px;
+            overflow: hidden; /* Noodzakelijk voor parallax */
+            position: relative; /* Voor absolute positionering van tekst overlay */
+            background-attachment: fixed; /* Parallax effect */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .hero-overlay { /* Donkere overlay voor tekst leesbaarheid */
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.35); /* Iets donkerder voor contrast */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-section h1 {
+            font-family: var(--font-headings);
+            font-size: 3.5rem; /* Nog groter voor impact */
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5); /* Duidelijkere schaduw */
+            animation: fadeInDown 1s ease-out;
+        }
+        .hero-section .tagline {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            color: #f0f0f0; /* Lichter voor contrast */
+            margin-bottom: 35px;
+            max-width: 800px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: backwards; /* Zorgt dat start state van animatie direct geldt */
+        }
+        .hero-section .cta-button {
+            animation: fadeInUp 1s ease-out 1s;
+            animation-fill-mode: backwards;
+            padding: 18px 35px; /* Grotere CTA */
+            font-size: 1.2rem;
+        }
+
+        /* --- USP Bar --- */
+        .usp-bar { background-color: var(--secondary-color); color: var(--primary-color); padding: 30px 0; text-align: center; border-bottom: 3px solid var(--cta-color); }
+        .usp-bar .usp-list-container { max-width: 1000px; margin: 0 auto; }
+        .usp-bar ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 20px 35px; }
+        .usp-bar li { font-size: 1.05rem; font-weight: 500; display: flex; align-items: center;}
+        .usp-bar li i { /* Font Awesome Icons */
+            color: var(--cta-color);
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+
+        /* --- General Content Styling --- */
+        .content-section { padding: 80px 0; border-bottom: 1px solid var(--light-gray); }
+        .content-section:last-of-type { border-bottom: none; }
+        .content-section h2 {
+            font-family: var(--font-headings); text-align: center; font-size: 2.8rem;
+            font-weight: 500; margin-top: 0; margin-bottom: 60px; /* Meer ruimte */
+            color: var(--primary-color); position: relative; padding-bottom: 15px;
+        }
+        .content-section h2::after { /* Decoratieve underline voor H2 */
+            content: ''; position: absolute;
+            width: 70px; height: 3px;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--cta-color);
+        }
+        .text-block { max-width: 780px; margin: 0 auto 30px auto; text-align: left; font-size: 1.1rem; line-height: 1.85; }
+        .text-block p { margin-bottom: 1.7em; }
+
+        .split-section { display: flex; gap: 50px; align-items: center; margin-bottom: 50px; }
+        .split-section .text-content, .split-section .image-content { flex: 1; }
+        .split-section img { width: 100%; height: auto; max-height: 480px; object-fit: cover; border-radius: var(--border-radius); box-shadow: var(--shadow-medium); transition: transform 0.4s ease, box-shadow 0.4s ease;}
+        .split-section img:hover { transform: scale(1.03); box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
+        .split-section h3 { font-family: var(--font-headings); font-size: 2rem; font-weight: 500; color: var(--primary-color); margin-top: 0; margin-bottom: 20px; }
+
+        .highlight-list { list-style: none; padding: 0; margin: 30px auto; columns: 2; column-gap: 40px; max-width: 750px; }
+        .highlight-list li { padding: 14px 0; border-bottom: 1px dotted #D3CFC5; font-size: 1.05rem; display: flex; align-items: center; }
+        .highlight-list li i { color: var(--cta-color); margin-right: 12px; font-size: 1.1rem; width:20px; text-align:center;} /* Iconen voor lijst */
+        .highlight-list li:last-child { border-bottom: none; }
+        @media (max-width: 768px) { .highlight-list { columns: 1; } }
+
+        /* --- Enhanced Gallery --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
+        .gallery-grid .gallery-item {
+            overflow: hidden; border-radius: var(--border-radius); cursor: pointer;
+            box-shadow: var(--shadow-light); position: relative;
+            transition: box-shadow 0.3s ease;
+        }
+        .gallery-grid .gallery-item::before { /* Overlay voor hover */
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0); transition: background-color 0.4s ease;
+        }
+        .gallery-grid .gallery-item:hover::before { background-color: rgba(0,0,0,0.3); }
+        .gallery-grid .gallery-item .zoom-icon { /* Vergrootglas icoon */
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            font-size: 2.5rem; color: white;
+            opacity: 0; transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .gallery-grid .gallery-item:hover .zoom-icon { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .gallery-grid img { width: 100%; height: 280px; object-fit: cover; display: block; transition: transform 0.4s ease; }
+        .gallery-grid .gallery-item:hover img { transform: scale(1.05); }
+
+        /* Lightbox Modal */
+        .lightbox { display: none; position: fixed; z-index: 2000; padding-top: 50px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(30,30,30,0.92); backdrop-filter: blur(5px); animation: fadeIn 0.3s ease;}
+        .lightbox-content { margin: auto; display: block; width: auto; max-width: 90%; max-height: 85%; border-radius: 5px; animation: zoomIn 0.3s ease;}
+        .lightbox-close { position: absolute; top: 25px; right: 40px; color: #f1f1f1; font-size: 50px; font-weight: bold; transition: 0.3s; cursor: pointer; text-shadow: 0 0 5px rgba(0,0,0,0.5);}
+        .lightbox-close:hover, .lightbox-close:focus { color: var(--cta-color); text-decoration: none; }
+        .lightbox-caption { margin: 20px auto 0 auto; display: block; width: 80%; max-width: 700px; text-align: center; color: #e0e0e0; padding: 10px 0; font-size: 1.1rem; }
+
+        /* --- Testimonials Section --- */
+        .testimonials-section { background-color: var(--light-gray); }
+        .testimonial-slider { /* Basis voor een slider, kan later met JS uitgebreid */ display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap:30px; padding-bottom:20px;}
+        .testimonial-card {
+            flex: 0 0 80%; /* Kaarten nemen 80% breedte, scrollbaar */
+            max-width: 450px; /* Max breedte per kaart */
+            scroll-snap-align: center;
+            background-color: #fff; padding: 30px; border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light); text-align: center;
+        }
+        .testimonial-card img.avatar { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+        .testimonial-card p.quote { font-style: italic; font-size: 1.05rem; margin-bottom: 15px; color: #555; }
+        .testimonial-card p.author { font-weight: 700; color: var(--primary-color); }
+        .testimonial-card .stars { color: var(--cta-color); margin-bottom: 10px; font-size:1.2rem; }
+
+        /* --- Map Section --- */
+        .map-section .map-container {
+            width: 100%; height: 450px;
+            border-radius: var(--border-radius); overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        .map-section iframe { width: 100%; height: 100%; border: 0; }
+
+        /* --- Booking & Contact Section --- */
+        .booking-container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+        .calendar-info, .contact-form-container { flex: 1; min-width: 320px; background-color: transparent; padding: 0; border-radius:0; } /* Verwijder achtergrond hier, verplaatst naar .contact-box-styled */
+        .contact-box-styled { background-color: var(--light-gray); padding: 35px; border-radius: var(--border-radius); margin-bottom: 30px;}
+        .calendar-info h3, .contact-form-container h3 { font-family: var(--font-headings); font-size: 1.8rem; color: var(--primary-color); margin-top:0; margin-bottom:25px; }
+        .cta-button { display: inline-block; background-color: var(--cta-color); color: white !important; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 700; font-size: 1.15rem; transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; border: none; cursor: pointer; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .cta-button:hover { background-color: var(--cta-hover-color); transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.15); }
+
+        /* Contact Form */
+        .contact-form label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 1rem; color: var(--primary-color); }
+        .contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea {
+            width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #D3CFC5;
+            border-radius: 6px; box-sizing: border-box; font-family: var(--font-primary); font-size: 1rem;
+            background-color: #fff; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-form input[type="text"]:focus, .contact-form input[type="email"]:focus, .contact-form textarea:focus {
+            border-color: var(--cta-color); box-shadow: 0 0 0 3px rgba(203, 109, 81, 0.25); outline:none;
+        }
+        .contact-form textarea { min-height: 160px; resize: vertical; }
+        .contact-form button { width: 100%; }
+
+        .contact-details { margin-top: 0; }
+        .contact-details p { margin-bottom: 14px; font-size: 1.05rem; }
+        .contact-details h4 { font-family: var(--font-headings); font-size: 1.4rem; margin-bottom:12px; color:var(--primary-color); }
+        .contact-details .email-link { font-size: 1.1rem; color: var(--cta-color); text-decoration: none; font-weight: 600; }
+        .contact-details .email-link:hover { text-decoration: underline; }
+        .practical-notes { margin-top: 40px; font-size: 0.95em; color: #555; font-style: italic; text-align:center; padding: 0 20px; line-height:1.6;}
+
+        /* --- Footer --- */
+        .site-footer { text-align: center; padding: 50px 30px; background-color: var(--footer-background); color: var(--footer-text); font-size: 1rem; margin-top: 60px; }
+        .site-footer p { margin: 10px 0; color: var(--footer-text); opacity:0.9; }
+        .footer-logo { font-family:var(--font-headings); font-size:1.8rem; font-weight:700; margin-bottom:15px; color:var(--footer-text); }
+        .social-links a { color: var(--footer-text); margin: 0 12px; font-size: 1.5rem; transition: color 0.3s ease; }
+        .social-links a:hover { color: var(--cta-color); }
+
+
+        /* --- Animations --- */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes zoomIn { from { transform: scale(0.8); opacity:0; } to { transform: scale(1); opacity:1; } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+        .fade-in-section { /* Class voor elementen die infaden bij scrollen */
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 950px) { /* Aangepast breekpunt */
+            .menu-toggle { display: block; }
+            nav ul { display: none; position: absolute; top: 80px; left: 0; background-color: white; width: 100%; flex-direction: column; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+            nav ul.active { display: flex; }
+            nav ul li { margin: 0; text-align: center; }
+            nav ul li a { display: block; padding: 18px; border-bottom: 1px solid var(--light-gray); }
+            nav ul li:last-child a { border-bottom: none; }
+            .split-section { flex-direction: column; align-items: stretch; }
+            .split-section.reverse-mobile .image-content { order: -1; }
+            .hero-section h1 { font-size: 2.8rem; }
+            .hero-section .tagline { font-size: 1.3rem; }
+            .usp-bar ul { flex-direction: column; align-items: center; gap: 15px; }
+            .booking-container { gap: 30px; }
+            .calendar-info, .contact-form-container { padding: 25px; }
+        }
+         @media (max-width: 600px) {
+             body { font-size:16px; padding-top:70px;}
+             nav { height:70px; }
+             nav .logo a { font-size:1.5rem;}
+             nav ul li a { font-size:0.95rem;}
+             nav ul.active {top:70px;}
+             .hero-section h1 { font-size: 2.2rem; }
+             .hero-section .tagline { font-size: 1.1rem; }
+             .usp-bar li { font-size:0.95rem;}
+             .content-section h2 { font-size: 2.3rem; margin-bottom:40px; }
+             .highlight-list { columns: 1; }
+             .text-block { font-size: 1rem; }
+             .testimonial-card { flex: 0 0 90%; }
+             .map-section .map-container { height:350px;}
+             .cta-button { padding: 14px 25px; font-size: 1.05rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav id="main-nav">
+        <div class="nav-container">
+            <div class="logo"><a href="#home">Villa Para d’Or</a></div>
+            <div class="menu-toggle" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul id="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#villa-description">De Villa</a></li>
+                <li><a href="#amenities-elegant">Voorzieningen</a></li>
+                <li><a href="#gallery-main">Galerij</a></li>
+                <li><a href="#reviews">Beoordelingen</a></li>
+                <li><a href="#surroundings">Omgeving</a></li>
+                <li><a href="#booking-contact">Contact & Boeken</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-section" style="background-image: url('images/2fc98c3f-54e0-4e87-97c8-f698496baa7d.jpg');">
+        <div class="hero-overlay">
+            <div class="wrapper">
+                <h1>Uw Exclusieve Vakantie-ervaring Begint Hier</h1>
+                <p class="tagline">Ontdek Villa Para d’Or: een oase van luxe, comfort en adembenemende uitzichten aan de Costa Blanca, op steenworp afstand van de Middellandse Zee.</p>
+                <a href="#booking-contact" class="cta-button">Boek Uw Verblijf</a>
+            </div>
+        </div>
+    </header>
+
+     <div class="usp-bar">
+        <div class="usp-list-container wrapper">
+            <ul>
+                <li><i class="fas fa-umbrella-beach"></i>150m van Strand La Fustera</li>
+                <li><i class="fas fa-water"></i>Adembenemend Zeezicht</li>
+                <li><i class="fas fa-swimming-pool"></i>Privé Zwembad & Zonneterras</li>
+                <li><i class="fas fa-couch"></i>Luxe & Comfortabel Interieur</li>
+                <li><i class="fas fa-user-shield"></i>Volledige Privacy</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <section class="content-section fade-in-section" id="introduction">
+            <h2>Welkom in Uw Stukje Paradijs</h2>
+            <div class="text-block">
+                <p>Stelt u zich voor: u wordt wakker met het zachte geruis van de golven, geniet van een verse espresso op uw zonovergoten privéterras, uitkijkend over de glinsterende Middellandse Zee en de majestueuze bergen. Bij Villa Para d’Or wordt deze droom verfijnde werkelijkheid. Dit sfeervolle en tot in de puntjes verzorgde vakantiehuis is een meesterwerk van modern comfort, naadloos verweven met de warme, authentieke Spaanse ziel.</p>
+                <p>De villa geniet een bevoorrechte ligging, op slechts een korte wandeling (150 meter) van het charmante strandje La Fustera, compleet met zijn gezellige strandbar. Direct vanuit uw voordeur start de prachtige Passeo Ecológica – een adembenemend kustpad dat u meandert langs de kustlijn tot in het levendige Calpe. Voor uw dagelijkse gemakken liggen een goed gesorteerde supermarkt en de ambachtelijke bakkerij Pic d’Or, voor verse croissants en knapperig stokbrood, op slechts 500 meter. Vanaf het moment van aankomst omhult de zilte zeelucht u; dit is thuiskomen.</p>
+            </div>
+        </section>
+
+        <section class="content-section fade-in-section" id="villa-description">
+            <h2>De Residentie: Een Harmonie van Luxe en Comfort</h2>
+            <div class="split-section">
+                <div class="text-content">
+                    <h3>Bovenverdieping: Panoramisch Genieten</h3>
+                    <p>De bovenverdieping is ontworpen voor ultiem genot, met een riant overdekt terras dat een ongeëvenaard uitzicht biedt. Binnen wacht een smaakvol ingerichte living met een comfortabele lounge, Smart TV, een state-of-the-art keuken voorzien van alle denkbare apparatuur, en een elegante eetruimte voor tien personen. Twee ruime slaapkamers, elk met op maat gemaakte kasten en een en-suite badkamer, bieden een serene nachtrust. De master-badkamer verwent u met een ligbad en directe toegang tot het terras.</p>
+                </div>
+                <div class="image-content">
+                    <img src="images/c2a89b30-c876-471d-bc75-bdc8d7e9318c.jpg" alt="Overdekt terras bovenverdieping met eettafel en uitzicht" onclick="openLightbox(this.src, this.alt)">
+                </div>
+            </div>
+            <div class="split-section reverse-mobile fade-in-section">
+                <div class="image-content">
+                     <img src="images/fa1b7680-061c-41d3-b43b-9669efab32ee (1).jpg" alt="Sfeervolle woonkamer met houten balken en design verlichting" onclick="openLightbox(this.src, this.alt)">
+                </div>
+                <div class="text-content">
+                    <h3>Gelijkvloers: Oase van Rust & Vermaak</h3>
+                    <p>Een sierlijke buitentrap leidt naar de gelijkvloerse verdieping, een wereld van ontspanning die direct toegang biedt tot het uitnodigende zwembad en het royale zonneterras. Hier proeft u de pure Spaanse levensvreugde. Deze etage herbergt een tweede, volledig zelfstandige leefruimte met TV en keuken, een eetplaats voor zes, en drie prachtig ingerichte slaapkamers, elk met een eigen badkamer (douche en toilet) en ingebouwde garderobekasten. De weelderige tuin, ontworpen met oog voor detail, garandeert absolute privacy voor uw siësta's, verfrissende duiken of onvergetelijke barbecue-avonden onder de sterrenhemel.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section fade-in-section" id="amenities-elegant">
+            <h2>Exclusieve Voorzieningen voor een Onvergetelijk Verblijf</h2>
+            <div class="text-block">
+                <ul class="highlight-list">
+                    <li><i class="fas fa-wind"></i>Airconditioning (alle slaapkamers & leefruimtes)</li>
+                    <li><i class="fas fa-wifi"></i>High-speed Wifi & Apple TV (streaming)</li>
+                    <li><i class="fas fa-bed"></i>Kwalitatieve bedden & luxe linnen</li>
+                    <li><i class="fas fa-temperature-low"></i>Vliegenramen in alle slaapkamers</li>
+                    <li><i class="fas fa-bath"></i>Luxe bad- en strandhanddoeken</li>
+                    <li><i class="fas fa-car"></i>Parkeren op eigen afgesloten terrein</li>
+                    <li><i class="fas fa-sun"></i>8 Teakhouten ligbedden met kussens</li>
+                    <li><i class="fas fa-utensils"></i>2 Volledig uitgeruste keukens</li>
+                    <li><i class="fas fa-couch"></i>Loungesets (boven & beneden)</li>
+                    <li><i class="fas fa-hot-tub"></i>Buitendouche (warm/koud)</li>
+                    <li><i class="fas fa-umbrella-beach"></i>Rieten parasols voor schaduw</li>
+                    <li><i class="fas fa-mortar-pestle"></i>Gasbarbecue (professioneel model)</li>
+                    <li><i class="fas fa-wine-glass-alt"></i>Eettafels buiten op beide verdiepingen</li>
+                    <li><i class="fas fa-tshirt"></i>Wasmachine en droogkast</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="content-section fade-in-section" id="gallery-main">
+            <h2>Ontdek de Elegantie van Villa Para d’Or</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/fd965125-7d46-4bf0-a4da-e787f234102c.jpg" alt="Vooraanzicht villa met sfeervolle pergola en lounge set">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/847b3aaf-394c-47ac-8797-a5105b290468.jpg" alt="Zonovergoten ligbedden aan het privé zwembad met bergzicht">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/30c41e79-11f2-4981-9487-f13bdaeb2808.jpg" alt="Stijlvolle overdekte loungehoek voor ontspannen momenten">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/e1fcbdc2-99ca-4e63-b213-a34424b8ed1b.jpg" alt="Elegant terras met eettafel en uitzicht op het azuurblauwe zwembad">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/31eb1311-9ec6-43bd-b33b-d6dfe89739db.jpg" alt="Dineren bij het zwembad onder de Spaanse zon">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/e4db088e-55b4-4e0b-b446-43a181781f08.jpg" alt="Spectaculair uitzicht vanaf het zwembad op de Middellandse Zee en Calpe">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/28d83922-4322-45dd-acb8-cd3a98f3ca48.jpg" alt="Idyllische tuin met fruitbomen en diverse zithoekjes">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/5da68955-db70-4059-b0fa-78dc799a1148.jpg" alt="Woonkamer interieur detail met unieke, warme sfeerverlichting">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/a86be6a3-7754-4bc9-97e6-412590f6fb8d.jpg" alt="Gezellige woonkamer met authentieke open haard">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/6da753f8-e834-48e7-abfe-2140be59cd99.jpg" alt="Moderne, strakke keuken voorzien van alle gemakken">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/c0c4b677-86f9-4e9f-a2a1-eb8576e5d53a.jpg" alt="Ruim eetgedeelte in de keuken met opvallende design lamp">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/6f3ea09c-61c1-4525-a52c-4597ca1c4367.jpg" alt="Comfortabele slaapkamer met tweepersoonsbed en rustieke houten details">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/28a18e98-d8c9-42c6-8a37-8d53ec5added.jpg" alt="Lichte en ruime slaapkamer, ingericht met natuurlijke materialen en sfeeraccenten">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                    <img src="images/cd8afcdb-9ae3-4567-acd4-c6eaaa3aa5a1.jpg" alt="Luxe, moderne badkamer met een vrijstaand design bad en ruime inloopdouche">
+                    <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="myLightbox" class="lightbox">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightboxImg">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+
+        <section class="content-section testimonials-section fade-in-section" id="reviews">
+            <h2>Wat Onze Gasten Zeggen</h2>
+            <div class="testimonial-slider wrapper">
+                <div class="testimonial-card">
+                    <img src="images/placeholder-avatar-1.jpg" alt="Gast avatar" class="avatar"> <p class="quote">"Een absoluut droomverblijf! De villa overtrof al onze verwachtingen. Het uitzicht is onbetaalbaar en de voorzieningen zijn top. We komen zeker terug!"</p>
+                    <p class="author">- Familie De Vries, Nederland</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="images/placeholder-avatar-2.jpg" alt="Gast avatar" class="avatar"> <p class="quote">"Wat een prachtige locatie en een heerlijk huis. Alles was tot in de puntjes verzorgd. De kinderen hebben genoten van het zwembad en wij van de rust en de luxe."</p>
+                    <p class="author">- Thomas & Chloé, België</p>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <img src="images/placeholder-avatar-3.jpg" alt="Gast avatar" class="avatar"> <p class="quote">"De perfecte uitvalsbasis om de Costa Blanca te verkennen. Na een dag vol avontuur was het heerlijk thuiskomen in Villa Para d’Or. Een aanrader!"</p>
+                    <p class="author">- Michael & Sarah, Duitsland</p>
+                     <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section fade-in-section" id="surroundings">
+             <h2>De Betoverende Omgeving van Benissa</h2>
+            <div class="text-block">
+                <p>De streek rond Benissa is een waar juweel aan de Costa Blanca, geroemd om zijn idyllische, verborgen baaitjes, verfijnde gastronomie en het schilderachtige, heuvelachtige binnenland. Het is een eldorado voor fietsliefhebbers (zowel racefiets als e-bike), fervente wandelaars, watersportfanaten en iedereen die simpelweg wil genieten van het goede Mediterrane leven. Ontdek de charme van authentieke dorpjes zoals Moraira, Jávea, Dénia, het bergfort Guadelest, het pottenbakkersdorp Gata de Gorgos en de wijnvallei van Jalón. De bruisende metropolen Valencia (circa 1,5 uur rijden) en Alicante (circa 45 minuten) bieden zich aan als perfecte dagtrips. Verwen uzelf met wijnproeverijen, maak idyllische boottochtjes, struin over lokale markten, of sla een balletje op de nabijgelegen paddle-, tennis- of golfbanen. Snorkelen en diverse watersporten zijn mogelijk bij de Les Bassetes-club, op een steenworp afstand.</p>
+                <p>In Villa Para d’Or beleeft u het échte, pure vakantiegevoel – elke dag opnieuw, met gouden randje.</p>
+            </div>
+        </section>
+
+        <section class="content-section map-section fade-in-section" id="location">
+            <h2>Ontdek Onze Perfecte Locatie</h2>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3110.200982791008!2d0.09980131534903501!3d38.68282697960432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd62011600000001%3A0x8f7c1b300a2a598a!2sPlatja%20de%20la%20Fustera!5e0!3m2!1snl!2sbe!4v1684000000000!5m2!1snl!2sbe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+             <div class="text-block" style="text-align:center; margin-top:30px;">
+                <p>Villa Para d’Or is ideaal gesitueerd in de rustige en gewilde wijk La Fustera in Benissa, op slechts 150 meter van het strand.</p>
+            </div>
+        </section>
+
+        <section class="content-section fade-in-section" id="booking-contact">
+            <h2>Neem Contact Op & Boek Uw Droomvakantie</h2>
+            <div class="booking-container">
+                <div class="calendar-info contact-box-styled">
+                    <h3>Beschikbaarheid & Direct Contact</h3>
+                    <p>Voor de meest actuele beschikbaarheid, tarieven en speciale aanbiedingen, verwijzen wij u graag naar onze officiële pagina op Micazu.</p>
+                    <a href="https://www.micazu.nl/vakantiehuis/spanje/costa-blanca/benissa/villa-para-dor-XXXXX" target="_blank" class="cta-button" style="margin-top:15px; margin-bottom:30px;">Bekijk Kalender & Tarieven op Micazu</a>
+                     <div class="contact-details">
+                        <h4>Heeft u een specifieke vraag?</h4>
+                        <p><i class="fas fa-envelope"></i> E-mail: <a href="mailto:jouwemail@voorbeeld.com" class="email-link">jouwemail@voorbeeld.com</a></p>
+                        <p><i class="fas fa-phone"></i> Telefoon: <a href="tel:+31000000000" class="email-link">[Jouw Telefoonnummer]</a></p>
+                    </div>
+                    <p style="font-size:0.9rem; margin-top:25px; color: #555;">(Vervang 'XXXXX' met uw Micazu ID of volledige link.)</p>
+                </div>
+
+                <div class="contact-form-container contact-box-styled">
+                    <h3>Stuur Ons Vandaag Nog een Bericht</h3>
+                    <form action="https://api.formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+                        <label for="name">Uw Naam:</label>
+                        <input type="text" id="name" name="name" required placeholder="Jan Modaal">
+
+                        <label for="email">Uw E-mailadres:</label>
+                        <input type="email" id="email" name="email" required placeholder="voorbeeld@email.com">
+
+                        <label for="message">Uw Vraag of Bericht:</label>
+                        <textarea id="message" name="message" required placeholder="Ik heb een vraag over..."></textarea>
+
+                        <button type="submit" class="cta-button">Bericht Versturen</button>
+                    </form>
+                </div>
+            </div>
+             <div class="practical-notes">
+                <p><strong>Belangrijke Huisregels:</strong> Huisdieren zijn niet toegestaan om de villa allergievriendelijk te houden. Roken is uitsluitend buitenshuis toegestaan. Villa Para d'Or is gericht op families en rustzoekers; wij verhuren daarom niet aan groepen jongeren. Conform de Spaanse wetgeving is ID-verificatie van alle gasten verplicht (de hoofdhuurder dient ID's van alle medereizigers te verstrekken).</p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="wrapper">
+            <div class="footer-logo">Villa Para d’Or</div>
+            <p>Uw exclusieve vakantieverblijf aan de Costa Blanca, Benissa.</p>
+            <div class="social-links" style="margin-top:15px; margin-bottom:15px;">
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            <p>&copy; <span id="currentYear"></span> Villa Para d’Or. Alle rechten voorbehouden.</p>
+            <p>Met liefde en zorg voor u gecreëerd.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Mobile Menu ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const navLinks = document.getElementById('nav-links');
+        if (menuButton && navLinks) {
+            menuButton.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                menuButton.querySelector('i').classList.toggle('fa-bars');
+                menuButton.querySelector('i').classList.toggle('fa-times');
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuButton.querySelector('i').classList.add('fa-bars');
+                        menuButton.querySelector('i').classList.remove('fa-times');
+                    }
+                });
+            });
+        }
+
+        // --- Active Menu Link on Scroll & Nav Bar Scroll Effect ---
+        const mainNav = document.getElementById('main-nav');
+        const sections = document.querySelectorAll("section[id], header[id]");
+        const navMenuLinks = document.querySelectorAll("nav ul li a");
+
+        window.addEventListener("scroll", () => {
+            // Nav bar scroll effect
+            if (window.scrollY > 50) {
+                mainNav.classList.add('scrolled');
+            } else {
+                mainNav.classList.remove('scrolled');
+            }
+
+            // Active menu link
+            let currentSectionId = "home";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - (mainNav.offsetHeight + 20) ) { // Adjusted offset
+                    currentSectionId = section.getAttribute("id");
+                }
+            });
+
+            navMenuLinks.forEach((a) => {
+                a.classList.remove("active");
+                if (a.getAttribute("href").substring(1) === currentSectionId) {
+                    a.classList.add("active");
+                }
+            });
+        });
+
+
+        // --- Lightbox ---
+        var lightbox = document.getElementById("myLightbox");
+        var lightboxImg = document.getElementById("lightboxImg");
+        var captionText = document.getElementById("lightboxCaption");
+        function openLightbox(src, alt) {
+            if (lightbox && lightboxImg && captionText) {
+                lightbox.style.display = "block";
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+                lightboxImg.src = src;
+                captionText.innerHTML = alt;
+            }
+        }
+        function closeLightbox() {
+            if (lightbox) {
+                lightbox.style.display = "none";
+                document.body.style.overflow = 'auto'; // Restore background scroll
+            }
+        }
+        if (lightbox) {
+            lightbox.addEventListener('click', function(event) {
+                if (event.target === lightbox || event.target.classList.contains('lightbox-close') ) { closeLightbox(); }
+            });
+        }
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && lightbox.style.display === "block") {
+                closeLightbox();
+            }
+        });
+
+
+        // --- Scroll Animations (Fade-in) ---
+        const observerOptions = {
+            root: null, // relative to document viewport
+            rootMargin: '0px',
+            threshold: 0.2 // 20% of the item is visible
+        };
+
+        function observerCallback(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Optional: stop observing once visible
+                }
+            });
+        }
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const fadeElms = document.querySelectorAll('.fade-in-section');
+        fadeElms.forEach(el => observer.observe(el));
+
+    </script>
+
+</body>
+</html>
