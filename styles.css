@@ -18,6 +18,11 @@
             --border-radius: 10px; /* Iets ronder voor een zachtere look */
             --shadow-light: 0 4px 12px rgba(0,0,0,0.04); /* Zachtere schaduw */
             --shadow-medium: 0 6px 18px rgba(0,0,0,0.06); /* Zachtere medium schaduw */
+
+            /* RGB versies voor RGBA kleuren */
+            --primary-color-rgb: 124, 111, 98;
+            --cta-color-rgb: 191, 160, 138;
+            --text-color-rgb: 51, 51, 51;
         }
 
         html { scroll-behavior: smooth; }
@@ -78,15 +83,17 @@
 
         /* --- Hero Section --- */
         .hero-section {
-            padding: 0;
-            height: 100vh; /* VOLLEDIGE SCHERMHOOGTE */
-            /* min-height en max-height zijn niet meer nodig met 100vh */
-            overflow: hidden;
-            position: relative;
-            background-attachment: fixed;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: cover; /* Zorgt dat de afbeelding het hele vlak bedekt, kan bijsnijden */
+            height: 100vh; /* Volledige viewport hoogte */
+            /* background-image is inline gezet in de HTML */
+            background-size: cover; /* Bedek het hele vlak, behoud aspect ratio, kan bijsnijden */
+            background-position: center center; /* Standaard centreren */
+            background-attachment: fixed; /* Parallax-achtig effect, kan prestatie-impact hebben */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative; /* Voor de overlay */
+            color: white; /* Standaard tekstkleur voor hero, wordt overschreven door overlay */
         }
         .hero-overlay {
             position: absolute;
@@ -471,17 +478,38 @@
             body {
                 font-size: 14px; /* Bijvoorbeeld, kleinere basislettergrootte */
             }
-            .some-element {
-                width: 100%; /* Maak een element volledig breed */
+            /* .some-element was een voorbeeld, kan weg als niet in gebruik */
+            /* .some-element {
+                width: 100%;
                 margin-left: 0;
                 margin-right: 0;
+            } */
+
+            /* Galerij aanpassingen voor mobiel */
+            .gallery-grid {
+                grid-template-columns: 1fr; /* 1 kolom, afbeeldingen onder elkaar */
+                gap: 15px; /* Iets kleinere tussenruimte op mobiel */
             }
-            /* Pas padding, marges, lettergroottes, etc. aan */
-        }
-        /* Helper voor RGB variabelen voor RGBA kleuren, indien nodig */
-        :root {
-            /* ... andere variabelen ... */
-            --primary-color-rgb: 124, 111, 98;
-            --cta-color-rgb: 191, 160, 138;
-            --text-color-rgb: 51, 51, 51;
+            .gallery-grid .gallery-item {
+                height: auto; /* Laat hoogte automatisch bepalen op basis van de afbeelding */
+                /* background-color: lightblue; */ /* TIJDELIJKE DEBUG: om te zien of het item er is */
+            }
+            .gallery-grid img {
+                display: block; /* Zorg dat dit expliciet is */
+                width: 100%;    /* Zorg dat dit expliciet is */
+                height: auto;   /* Behoud aspect ratio, schaalt met de breedte */
+                /* object-fit: unset; */ /* TIJDELIJK OM TE TESTEN: Zet object-fit uit. Als dit helpt,
+                                            dan is er een interactie met object-fit: cover.
+                                            Verwijder deze regel weer als het niet de oplossing is. */
+            }
+
+            .highlight-list { columns: 1; }
+
+            .hero-section {
+                background-attachment: scroll;
+                background-position: center 70%; /* Of je gekozen waarde */
+                min-height: calc(var(--vh, 1vh) * 100); /* GEBRUIK DE --vh VARIABELE */
+                /* height: calc(var(--vh, 1vh) * 100); */ /* Kan ook, min-height is vaak veiliger */
+            }
+            /* Voeg hier eventueel andere algemene aanpassingen voor 768px toe */
         }
