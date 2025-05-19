@@ -268,14 +268,19 @@
         </section>
     </div>
 
+    <div id="cookieConsentBanner" class="cookie-consent-banner" style="display: none;">
+    <p>Deze website gebruikt cookies om uw ervaring te verbeteren, met name voor de functionaliteit van Google Maps. Door op "Accepteren" te klikken, gaat u akkoord met het gebruik van deze cookies. <a href="privacy.html" target="_blank" rel="noopener noreferrer" class="cookie-consent-link">Meer informatie</a></p>
+    <button id="acceptCookieButton" class="cta-button cookie-consent-button">Accepteren</button>
+</div>
+
     <footer class="site-footer">
-        <div class="wrapper">
-            <div class="footer-logo">Villa Para d’Or</div>
-            <p>Uw exclusieve vakantieverblijf aan de Costa Blanca, Benissa.</p>
-            <div class="social-links" style="margin-top:15px; margin-bottom:15px;">
-                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
+        <div class="footer-content">
             <p>&copy; <span id="currentYear"></span> Villa Para d’Or. Alle rechten voorbehouden.</p>
+            <p class="footer-links">
+                <a href="privacy.html">Privacy- & Cookiebeleid</a>
+                <!-- Eventuele andere links hier, bijv. Algemene Voorwaarden -->
+            </p>
+            <p>Ontworpen door [Jouw Naam/Bedrijfsnaam indien gewenst]</p>
         </div>
     </footer>
 
@@ -487,51 +492,100 @@
 
         // VERWIJDER HIER DE OUDE mobileGallery functie als die er nog stond.
 
-        // --- Google Maps Initialisatie ---
+        // --- Cookie Consent Logic ---
+        const cookieConsentKey = 'villaParadorCookieConsentGiven';
+        const cookieBanner = document.getElementById('cookieConsentBanner');
+        const acceptCookieButton = document.getElementById('acceptCookieButton');
+        let googleMapsAPILoaded = false; // Vlag om te voorkomen dat API meerdere keren wordt geladen
+
+        // Functie om de Google Maps API dynamisch te laden
+        function loadGoogleMapsAPI() {
+            if (googleMapsAPILoaded || !document.getElementById('map-canvas')) {
+                // Niet laden als al geladen of als er geen map-canvas is
+                return;
+            }
+
+            const apiKey = "AIzaSyDjBoADPeht0MB_iKcpUoZX69N6n1IyU5g"; // Je API sleutel
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&libraries=maps,marker&v=beta`;
+            script.async = true;
+            script.defer = true;
+            script.onerror = () => {
+                console.error("Google Maps API kon niet geladen worden.");
+                // Eventueel feedback aan de gebruiker tonen dat de kaart niet beschikbaar is.
+            };
+            document.head.appendChild(script);
+            googleMapsAPILoaded = true;
+        }
+
+        // De initMap functie blijft hieronder zoals die was,
+        // maar wordt nu aangeroepen door de callback in de dynamisch geladen script tag.
+
+        // --- Google Maps Initialisatie (blijft grotendeels hetzelfde) ---
         function initMap() {
             // NIEUWE COÖRDINATEN VOOR DE CIRKEL
             const villaLocation = { lat: 38.66489188287154, lng: 0.08778440280923862 };
 
-            const map = new google.maps.Map(document.getElementById("map-canvas"), {
-                zoom: 15, // Je kunt het zoomniveau eventueel aanpassen om de nieuwe locatie goed te zien
-                center: villaLocation, // Kaart centreren op de nieuwe locatie
-                // Geen custom styles, dus standaard Google Maps look
-                disableDefaultUI: true, // Verberg alle standaard UI elementen
-                zoomControl: true,      // Zet specifiek de zoomknoppen weer aan
+            const mapElement = document.getElementById("map-canvas");
+            if (!mapElement) {
+                console.error("Map canvas element niet gevonden voor initMap.");
+                return;
+            }
+
+            const map = new google.maps.Map(mapElement, {
+                zoom: 15,
+                center: villaLocation,
+                disableDefaultUI: true,
+                zoomControl: true,
                 zoomControlOptions: {
                     position: google.maps.ControlPosition.TOP_LEFT
                 }
-                // De volgende controls zijn nu overbodig door disableDefaultUI: true,
-                // maar voor de duidelijkheid kun je ze laten staan of verwijderen:
-                // mapTypeControl: false,
-                // scaleControl: false,
-                // streetViewControl: false,
-                // rotateControl: false,
-                // fullscreenControl: false
             });
 
-            const locationCircle = new google.maps.Circle({
-                strokeColor: '#BFA08A', // Je CTA kleur voor de cirkelrand
+            new google.maps.Circle({ // Direct new google.maps.Circle
+                strokeColor: '#BFA08A',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#BFA08A',   // Je CTA kleur voor de cirkelopvulling
+                fillColor: '#BFA08A',
                 fillOpacity: 0.25,
                 map: map,
-                center: villaLocation, // Cirkel centreren op de nieuwe locatie
-                radius: 500 // Radius in meters (blijft 500m)
+                center: villaLocation,
+                radius: 500
             });
         }
 
-        // Zorg ervoor dat de 'load' event listener de setupInitialGalleryView aanroept
-        // De initMap wordt aangeroepen door de callback in de Google Maps API script tag
+
+        function handleCookieConsent() {
+            if (localStorage.getItem(cookieConsentKey) === 'true') {
+                if (cookieBanner) cookieBanner.style.display = 'none';
+                loadGoogleMapsAPI(); // Laad Google Maps direct als toestemming al is gegeven
+            } else {
+                if (cookieBanner) cookieBanner.style.display = 'flex'; // Gebruik flex voor styling
+            }
+        }
+
+        if (acceptCookieButton && cookieBanner) {
+            acceptCookieButton.addEventListener('click', () => {
+                localStorage.setItem(cookieConsentKey, 'true');
+                cookieBanner.style.display = 'none';
+                loadGoogleMapsAPI(); // Laad Google Maps na acceptatie
+            });
+        }
+
+        // Aangepaste 'load' event listener
         window.addEventListener('load', () => {
+            setVhProperty();
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            // Mobile Menu en Active Link on Scroll logica blijft hier...
+            // Lightbox logica blijft hier...
+            startObserving();
             setupInitialGalleryView();
-            // initMap(); // NIET HIER aanroepen als je de callback in de API URL gebruikt
+
+            handleCookieConsent(); // Voer de cookie check uit
+            // De initMap() wordt nu aangeroepen via de callback in de dynamisch geladen Google Maps API script
         });
 
     </script>
-    <!-- Laad de Google Maps API NA je initMap functie, gebruik de callback parameter -->
-    <!-- VERVANG YOUR_API_KEY met je daadwerkelijke API sleutel -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjBoADPeht0MB_iKcpUoZX69N6n1IyU5g&callback=initMap&libraries=maps,marker&v=beta"></script>
+    <!-- DE STATISCHE GOOGLE MAPS API SCRIPT TAG IS HIER VERWIJDERD -->
 </body>
 </html>

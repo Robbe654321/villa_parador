@@ -413,11 +413,56 @@
         }
 
         /* --- Footer --- */
-        .site-footer { text-align: center; padding: 40px 20px; background-color: var(--footer-background); color: var(--footer-text); font-size: 0.95rem; margin-top: 50px; }
-        .site-footer p { margin: 8px 0; color: var(--footer-text); opacity:0.85; }
-        .footer-logo { font-family:var(--font-headings); font-size:1.7rem; font-weight:500; margin-bottom:12px; color:var(--footer-text); }
-        .social-links a { color: var(--footer-text); margin: 0 10px; font-size: 1.4rem; transition: color 0.3s ease, transform 0.2s ease; display: inline-block; }
-        .social-links a:hover { color: var(--cta-color); transform: scale(1.1); }
+        .site-footer {
+            text-align: center;
+            padding: 20px 0; /* Zorg voor voldoende padding */
+            background-color: var(--footer-background);
+            color: var(--footer-text);
+            font-size: 0.95rem;
+            margin-top: 50px;
+        }
+        .site-footer p {
+            margin: 8px 0;
+            color: var(--footer-text);
+            opacity: 0.85;
+        }
+        .footer-logo {
+            font-family: var(--font-headings);
+            font-size: 1.7rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--footer-text);
+        }
+        .social-links a {
+            color: var(--footer-text);
+            margin: 0 10px;
+            font-size: 1.4rem;
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+        .social-links a:hover {
+            color: var(--cta-color);
+            transform: scale(1.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px; /* Kleine ruimte tussen de paragraaf elementen */
+        }
+
+        .footer-links a {
+            color: var(--text-light); /* Of een andere geschikte kleur */
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--cta-color); /* Of je primaire kleur */
+            text-decoration: underline;
+        }
 
         /* --- Animations --- */
         /* Keyframes blijven hetzelfde, maar de fade-in-section transitie kan iets sneller */
@@ -518,3 +563,54 @@
             }
             /* Voeg hier eventueel andere algemene aanpassingen voor 768px toe */
         }
+
+        /* --- Cookie Consent Banner --- */
+        .cookie-consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color); /* Gebruik je site kleuren */
+    color: var(--background-color);
+    padding: 20px;
+    box-shadow: 0 -3px 15px rgba(0,0,0,0.25);
+    z-index: 10000; /* Zorg dat het boven alles staat */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Voor kleinere schermen */
+    gap: 15px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.cookie-consent-banner p {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.cookie-consent-banner .cookie-consent-link {
+    color: var(--cta-color); /* Of een andere contrasterende kleur */
+    text-decoration: underline;
+}
+
+.cookie-consent-banner .cookie-consent-link:hover {
+    color: var(--cta-hover-color);
+}
+
+.cookie-consent-banner .cookie-consent-button {
+    /* cta-button stijl wordt al toegepast, eventueel specifieke overrides hier */
+    padding: 10px 25px;
+    flex-shrink: 0; /* Voorkom dat de knop krimpt */
+}
+
+/* Media query voor kleinere schermen */
+@media (max-width: 768px) {
+    .cookie-consent-banner {
+        flex-direction: column;
+        text-align: center;
+    }
+    .cookie-consent-banner p {
+        margin-bottom: 15px;
+    }
+}
