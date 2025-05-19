@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotogalerij - Villa Para d’Or</title>
+    <!-- Link naar dezelfde CSS bestanden als index.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Optionele extra stijlen specifiek voor de galerijpagina */
+        body {
+            padding-top: 100px; /* Ruimte voor de nav als je die kopieert */
+        }
+        .full-gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .full-gallery-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        .back-to-home {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--cta-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-to-home:hover {
+            text-decoration: underline;
+        }
+        /* Zorg dat de .gallery-grid en .gallery-item stijlen uit styles.css hier ook werken */
+        /* Als je op deze pagina een andere kolomindeling wilt, kun je dat hier overschrijven */
+        /* Bijvoorbeeld altijd 3 kolommen, ongeacht schermgrootte, of juist meer responsive */
+        /* .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } */
+    </style>
+</head>
+<body>
+
+    <!-- Optioneel: Kopieer je navigatiebalk van index.html hier als je die wilt -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html#home">Villa Para d’Or</a></div>
+            <!-- Vereenvoudigde nav voor galerij, of volledige nav -->
+            <ul id="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#booking-contact">Contact & Boeken</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="full-gallery-header">
+            <a href="index.html" class="back-to-home"><i class="fas fa-arrow-left"></i> Terug naar de Villa</a>
+            <h1>Fotogalerij Villa Para d’Or</h1>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- KOPIEER HIER AL JE .gallery-item DIVS VAN index.html -->
+            <!-- Zorg ervoor dat alle afbeeldingen hier getoond worden -->
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/fd965125-7d46-4bf0-a4da-e787f234102c.JPG" alt="Vooraanzicht villa met sfeervolle pergola en lounge set">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/847b3aaf-394c-47ac-8797-a5105b290468.JPG" alt="Zonovergoten ligbedden aan het privé zwembad met bergzicht">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/30c41e79-11f2-4981-9487-f13bdaeb2808.JPG" alt="Stijlvolle overdekte loungehoek voor ontspannen momenten">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/e1fcbdc2-99ca-4e63-b213-a34424b8ed1b.JPG" alt="Elegant terras met eettafel en uitzicht op het azuurblauwe zwembad">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/31eb1311-9ec6-43bd-b33b-d6dfe89739db.JPG" alt="Dineren bij het zwembad onder de Spaanse zon">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/e4db088e-55b4-4e0b-b446-43a181781f08.JPG" alt="Spectaculair uitzicht vanaf het zwembad op de Middellandse Zee en Calpe">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/28d83922-4322-45dd-acb8-cd3a98f3ca48.JPG" alt="Idyllische tuin met fruitbomen en diverse zithoekjes">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/5da68955-db70-4059-b0fa-78dc799a1148.JPG" alt="Woonkamer interieur detail met unieke, warme sfeerverlichting">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/a86be6a3-7754-4bc9-97e6-412590f6fb8d.JPG" alt="Gezellige woonkamer met authentieke open haard">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/6da753f8-e834-48e7-abfe-2140be59cd99.JPG" alt="Moderne, strakke keuken voorzien van alle gemakken">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/c0c4b677-86f9-4e9f-a2a1-eb8576e5d53a.JPG" alt="Ruim eetgedeelte in de keuken met opvallende design lamp">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/6f3ea09c-61c1-4525-a52c-4597ca1c4367.JPG" alt="Comfortabele slaapkamer met tweepersoonsbed en rustieke houten details">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/28a18e98-d8c9-42c6-8a37-8d53ec5added.JPG" alt="Lichte en ruime slaapkamer, ingericht met natuurlijke materialen en sfeeraccenten">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+                <img src="images/cd8afcdb-9ae3-4567-acd4-c6eaaa3aa5a1.JPG" alt="Luxe, moderne badkamer met een vrijstaand design bad en ruime inloopdouche">
+                <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+            </div>
+            <!-- Voeg hier eventueel nog MEER gallery items toe als je er meer hebt -->
+        </div>
+    </div>
+
+    <!-- Lightbox HTML (kopieer van index.html als je die hier ook wilt gebruiken) -->
+    <div id="myLightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+    <!-- Optioneel: Kopieer je footer van index.html hier -->
+    <footer class="site-footer" style="margin-top: 50px;">
+        <div class="wrapper">
+            <p>&copy; <span id="currentYearGallery"></span> Villa Para d’Or. Alle rechten voorbehouden.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lightbox JavaScript (kopieer van index.html)
+        var lightbox = document.getElementById("myLightbox");
+        var lightboxImg = document.getElementById("lightboxImg");
+        var captionText = document.getElementById("lightboxCaption");
+        function openLightbox(src, alt) {
+            if (lightbox && lightboxImg && captionText) {
+                lightbox.style.display = "block";
+                document.body.style.overflow = 'hidden';
+                lightboxImg.src = src;
+                captionText.innerHTML = alt;
+            }
+        }
+        function closeLightbox() {
+            if (lightbox) {
+                lightbox.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        }
+        if (lightbox) {
+            lightbox.addEventListener('click', function(event) {
+                if (event.target === lightbox || event.target.classList.contains('lightbox-close') ) { closeLightbox(); }
+            });
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && lightbox.style.display === "block") {
+                closeLightbox();
+            }
+        });
+
+        // Copyright jaar voor galerijpagina
+        if(document.getElementById('currentYearGallery')) {
+            document.getElementById('currentYearGallery').textContent = new Date().getFullYear();
+        }
+
+        // Als je de volledige navigatie hebt gekopieerd, kopieer dan ook de mobile menu JS
+    </script>
+
+</body>
+</html>
